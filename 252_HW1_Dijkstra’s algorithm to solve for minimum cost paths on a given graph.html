@@ -14580,7 +14580,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Name:-Kapil-Wanaskar">Name: Kapil Wanaskar<a class="anchor-link" href="#Name:-Kapil-Wanaskar">&#182;</a></h1><h1 id="Subject:-CMPE-252:-AI-and-Data-Engineering">Subject: CMPE 252: AI and Data Engineering<a class="anchor-link" href="#Subject:-CMPE-252:-AI-and-Data-Engineering">&#182;</a></h1><h1 id="School:-San-Jose-Satte-University,-California">School: San Jose Satte University, California<a class="anchor-link" href="#School:-San-Jose-Satte-University,-California">&#182;</a></h1><h1 id="Sem:-Fall-2023">Sem: Fall 2023<a class="anchor-link" href="#Sem:-Fall-2023">&#182;</a></h1><h1 id="Homework-1">Homework 1<a class="anchor-link" href="#Homework-1">&#182;</a></h1>
+<h1 id="Name:-Kapil-Wanaskar">Name: Kapil Wanaskar<a class="anchor-link" href="#Name:-Kapil-Wanaskar">&#182;</a></h1><h1 id="Student-ID:-016649880">Student ID: 016649880<a class="anchor-link" href="#Student-ID:-016649880">&#182;</a></h1><h1 id="Subject:-CMPE-252:-AI-and-Data-Engineering">Subject: CMPE 252: AI and Data Engineering<a class="anchor-link" href="#Subject:-CMPE-252:-AI-and-Data-Engineering">&#182;</a></h1><h1 id="School:-San-Jose-Satte-University,-California">School: San Jose Satte University, California<a class="anchor-link" href="#School:-San-Jose-Satte-University,-California">&#182;</a></h1><h1 id="Sem:-Fall-2023">Sem: Fall 2023<a class="anchor-link" href="#Sem:-Fall-2023">&#182;</a></h1><h1 id="Homework-1">Homework 1<a class="anchor-link" href="#Homework-1">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -14696,54 +14696,99 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">heapq</span>
 
-<span class="k">def</span> <span class="nf">parse_input</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span> <span class="c1"># parse input file</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># read input file</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="c1"># number of vertices</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="c1"># start vertex</span>
-        <span class="n">goal</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="c1"># goal vertex</span>
-        <span class="n">edges</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># edges dictionary (key: vertex, value: list of tuples (neighbor, weight))</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># read edges and weights and add to edges dictionary</span>
-            <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># u: vertex, v: neighbor, w: weight</span>
-            <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="c1"># convert to int and float as needed</span>
-            <span class="k">if</span> <span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span> <span class="c1"># add vertex to edges dictionary if not already present</span>
-                <span class="n">edges</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># initialize list of neighbors and weights for vertex u in edges dictionary</span>
-            <span class="n">edges</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span> <span class="c1"># add neighbor and weight to list of neighbors and weights for vertex u in edges dictionary</span>
-    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span> <span class="c1"># return number of vertices, start vertex, goal vertex, and edges dictionary</span>
+<span class="k">def</span> <span class="nf">parse_input</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span> 
+    <span class="c1"># parse input file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+        <span class="c1"># read input file</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> 
+        <span class="c1"># number of vertices</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> 
+        <span class="c1"># start vertex</span>
+        <span class="n">goal</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> 
+        <span class="c1"># goal vertex</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">{}</span> 
+        <span class="c1"># edges dictionary (key: vertex, value: list of tuples (neighbor, weight))</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span> 
+            <span class="c1"># read edges and weights and add to edges dictionary</span>
+            <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> 
+            <span class="c1"># u: vertex, v: neighbor, w: weight</span>
+            <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> 
+            <span class="c1"># convert to int and float as needed</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span> 
+            <span class="c1"># add vertex to edges dictionary if not already present</span>
+                <span class="n">edges</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span> 
+                <span class="c1"># initialize list of neighbors and weights for vertex u in edges dictionary</span>
+            <span class="n">edges</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span> 
+            <span class="c1"># add neighbor and weight to list of neighbors and weights for vertex u in edges dictionary</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span> 
+    <span class="c1"># return number of vertices, start vertex, goal vertex, and edges dictionary</span>
 
-<span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span> <span class="c1"># Dijkstra's algorithm to solve for minimum cost paths on a given graph</span>
-    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c1"># initialize visited set</span>
-    <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span><span class="n">vertex</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'infinity'</span><span class="p">)</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span> <span class="c1"># initialize distances dictionary (key: vertex, value: distance)</span>
-    <span class="n">previous_vertices</span> <span class="o">=</span> <span class="p">{</span><span class="n">vertex</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span> <span class="c1"># initialize previous vertices dictionary (key: vertex, value: previous vertex)</span>
-    <span class="n">distances</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># set distance of start vertex to 0</span>
-    <span class="n">vertices</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)]</span> <span class="c1"># initialize vertices list (tuple: (distance, vertex))</span>
-    <span class="k">while</span> <span class="n">vertices</span><span class="p">:</span> <span class="c1"># while vertices list is not empty (i.e., there are still vertices to visit)</span>
-        <span class="n">current_distance</span><span class="p">,</span> <span class="n">current_vertex</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span> <span class="c1"># pop vertex with minimum distance from vertices list</span>
-        <span class="k">if</span> <span class="n">current_vertex</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span> <span class="c1"># if vertex has already been visited, continue</span>
-            <span class="k">continue</span> <span class="c1"># continue to next iteration of while loop</span>
-        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">)</span> <span class="c1"># add vertex to visited set (i.e., mark vertex as visited)</span>
-        <span class="k">for</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">,</span> <span class="p">[]):</span> <span class="c1"># for each neighbor of current vertex</span>
-            <span class="n">distance</span> <span class="o">=</span> <span class="n">current_distance</span> <span class="o">+</span> <span class="n">weight</span> <span class="c1"># calculate distance to neighbor</span>
-            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">distances</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]:</span> <span class="c1"># if distance to neighbor is less than current distance to neighbor</span>
-                <span class="n">distances</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span> <span class="c1"># update distance to neighbor</span>
-                <span class="n">previous_vertices</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_vertex</span> <span class="c1"># update previous vertex of neighbor</span>
-                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">))</span> <span class="c1"># push neighbor to vertices list</span>
-    <span class="n">path</span><span class="p">,</span> <span class="n">current_vertex</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">goal</span> <span class="c1"># initialize path list and current vertex</span>
-    <span class="k">while</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># while current vertex has a previous vertex</span>
-        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">)</span> <span class="c1"># append current vertex to path list</span>
-        <span class="n">current_vertex</span> <span class="o">=</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="c1"># update current vertex to previous vertex</span>
-    <span class="k">if</span> <span class="n">current_vertex</span> <span class="o">!=</span> <span class="n">start</span><span class="p">:</span> <span class="c1"># if current vertex is not start vertex</span>
-        <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span> <span class="c1"># return empty path and empty distances</span>
-    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="c1"># append start vertex to path list</span>
-    <span class="k">return</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">distances</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="c1"># return path list in reverse order and distances list in reverse order</span>
+<span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span> 
+<span class="c1"># Dijkstra's algorithm to solve for minimum cost paths on a given graph</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> 
+    <span class="c1"># initialize visited set</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span><span class="n">vertex</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'infinity'</span><span class="p">)</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span> 
+    <span class="c1"># initialize distances dictionary (key: vertex, value: distance)</span>
+    <span class="n">previous_vertices</span> <span class="o">=</span> <span class="p">{</span><span class="n">vertex</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span> 
+    <span class="c1"># initialize previous vertices dictionary (key: vertex, value: previous vertex)</span>
+    <span class="n">distances</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> 
+    <span class="c1"># set distance of start vertex to 0</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)]</span> 
+    <span class="c1"># initialize vertices list (tuple: (distance, vertex))</span>
+    <span class="k">while</span> <span class="n">vertices</span><span class="p">:</span> 
+    <span class="c1"># while vertices list is not empty (i.e., there are still vertices to visit)</span>
+        <span class="n">current_distance</span><span class="p">,</span> <span class="n">current_vertex</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span> 
+        <span class="c1"># pop vertex with minimum distance from vertices list</span>
+        <span class="k">if</span> <span class="n">current_vertex</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span> 
+        <span class="c1"># if vertex has already been visited, continue</span>
+            <span class="k">continue</span> 
+            <span class="c1"># continue to next iteration of while loop</span>
+        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">)</span> 
+        <span class="c1"># add vertex to visited set (i.e., mark vertex as visited)</span>
+        <span class="k">for</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">,</span> <span class="p">[]):</span> 
+        <span class="c1"># for each neighbor of current vertex</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="n">current_distance</span> <span class="o">+</span> <span class="n">weight</span> 
+            <span class="c1"># calculate distance to neighbor</span>
+            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">distances</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]:</span> 
+            <span class="c1"># if distance to neighbor is less than current distance to neighbor</span>
+                <span class="n">distances</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span> 
+                <span class="c1"># update distance to neighbor</span>
+                <span class="n">previous_vertices</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_vertex</span> 
+                <span class="c1"># update previous vertex of neighbor</span>
+                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">))</span> 
+                <span class="c1"># push neighbor to vertices list</span>
+    <span class="n">path</span><span class="p">,</span> <span class="n">current_vertex</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">goal</span> 
+    <span class="c1"># initialize path list and current vertex</span>
+    <span class="k">while</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
+    <span class="c1"># while current vertex has a previous vertex</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">)</span> 
+        <span class="c1"># append current vertex to path list</span>
+        <span class="n">current_vertex</span> <span class="o">=</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> 
+        <span class="c1"># update current vertex to previous vertex</span>
+    <span class="k">if</span> <span class="n">current_vertex</span> <span class="o">!=</span> <span class="n">start</span><span class="p">:</span>
+    <span class="c1"># if current vertex is not start vertex</span>
+        <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span> 
+        <span class="c1"># return empty path and empty distances</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> 
+    <span class="c1"># append start vertex to path list</span>
+    <span class="k">return</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">distances</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> 
+    <span class="c1"># return path list in reverse order and distances list in reverse order</span>
 
-<span class="k">def</span> <span class="nf">write_output</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">distances</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">"output.txt"</span><span class="p">):</span> <span class="c1"># write output file</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># write output file (path and distances)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span> <span class="c1"># write path to output file (space-separated)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'</span><span class="si">{:.4f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">])</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span> <span class="c1"># write distances to output file (space-separated, formatted to 4 decimal places)</span>
+<span class="k">def</span> <span class="nf">write_output</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">distances</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">"output.txt"</span><span class="p">):</span> 
+<span class="c1"># write output file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+    <span class="c1"># write output file (path and distances)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span> 
+        <span class="c1"># write path to output file (space-separated)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'</span><span class="si">{:.4f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">])</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span> 
+        <span class="c1"># write distances to output file (space-separated, formatted to 4 decimal places)</span>
 
-<span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="s1">'input.txt'</span><span class="p">)</span> <span class="c1"># parse input file and store number of vertices, start vertex, goal vertex, and edges dictionary</span>
-<span class="n">path</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">dijkstra</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span> <span class="c1"># run Dijkstra's algorithm to solve for minimum cost paths on a given graph and store path and distances</span>
-<span class="n">write_output</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span> <span class="c1"># write output file (path and distances) to output.txt file</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="s1">'input.txt'</span><span class="p">)</span> 
+<span class="c1"># parse input file and store number of vertices, start vertex, goal vertex, and edges dictionary</span>
+<span class="n">path</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">dijkstra</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span> 
+<span class="c1"># run Dijkstra's algorithm to solve for minimum cost paths on a given graph and store path and distances</span>
+<span class="n">write_output</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span> 
+<span class="c1"># write output file (path and distances) to output.txt file</span>
 </pre></div>
 
      </div>
@@ -14908,13 +14953,20 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">heapq</span> <span class="c1"># import heapq module (for priority queue)</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span> <span class="c1"># import networkx module (for graph visualization) and rename as nx</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> <span class="c1"># import matplotlib.pyplot module (for graph visualization) and rename as plt</span>
-<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span> <span class="c1"># import BytesIO module (for graph visualization)</span>
-<span class="kn">import</span> <span class="nn">imageio.v2</span> <span class="k">as</span> <span class="nn">imageio</span> <span class="c1"># import imageio module (for graph visualization)</span>
-<span class="kn">import</span> <span class="nn">os</span> <span class="c1"># import os module (for graph visualization)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'IMAGEIO_FFMPEG_EXE'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'/opt/homebrew/bin/ffmpeg'</span> <span class="c1"># set path to ffmpeg executable (for graph visualization)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">heapq</span> 
+<span class="c1"># import heapq module (for priority queue)</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span> 
+<span class="c1"># import networkx module (for graph visualization) and rename as nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="c1"># import matplotlib.pyplot module (for graph visualization) and rename as plt</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span> 
+<span class="c1"># import BytesIO module (for graph visualization)</span>
+<span class="kn">import</span> <span class="nn">imageio.v2</span> <span class="k">as</span> <span class="nn">imageio</span> 
+<span class="c1"># import imageio module (for graph visualization)</span>
+<span class="kn">import</span> <span class="nn">os</span> 
+<span class="c1"># import os module (for graph visualization)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'IMAGEIO_FFMPEG_EXE'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'/opt/homebrew/bin/ffmpeg'</span> 
+<span class="c1"># set path to ffmpeg executable (for graph visualization)</span>
 
 <span class="k">def</span> <span class="nf">parse_input</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -14930,16 +14982,23 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
             <span class="n">edges</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span>
 
-<span class="k">def</span> <span class="nf">parse_coordinates</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span> <span class="c1"># parse coordinates file (for graph visualization) </span>
+<span class="k">def</span> <span class="nf">parse_coordinates</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span> 
+<span class="c1"># parse coordinates file (for graph visualization) </span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Parses the 'coords.txt' file and returns a dictionary with vertex number as key and (x, y) tuple as value.</span>
 <span class="sd">    """</span>
-    <span class="n">coords</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># initialize coordinates dictionary (key: vertex, value: (x, y) tuple)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># read coordinates file (for graph visualization)</span>
-        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># for each line in coordinates file (for graph visualization) (enumerate from 1)</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="c1"># read x and y coordinates and convert to float</span>
-            <span class="n">coords</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1"># add vertex and (x, y) tuple to coordinates dictionary (for graph visualization)</span>
-    <span class="k">return</span> <span class="n">coords</span> <span class="c1"># return coordinates dictionary (for graph visualization)  </span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="p">{}</span> 
+    <span class="c1"># initialize coordinates dictionary (key: vertex, value: (x, y) tuple)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+    <span class="c1"># read coordinates file (for graph visualization)</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span> 
+        <span class="c1"># for each line in coordinates file (for graph visualization) (enumerate from 1)</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> 
+            <span class="c1"># read x and y coordinates and convert to float</span>
+            <span class="n">coords</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> 
+            <span class="c1"># add vertex and (x, y) tuple to coordinates dictionary (for graph visualization)</span>
+    <span class="k">return</span> <span class="n">coords</span> 
+    <span class="c1"># return coordinates dictionary (for graph visualization)  </span>
 
 
 <span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
@@ -14973,105 +15032,168 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'</span><span class="si">{:.4f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">])</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">visualize_graph</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">active_vertex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partial_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">active_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> <span class="c1"># visualize graph (for graph visualization) </span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span> <span class="c1"># initialize graph (for graph visualization) </span>
+<span class="k">def</span> <span class="nf">visualize_graph</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">active_vertex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partial_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">active_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> 
+    <span class="c1"># visualize graph (for graph visualization) </span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span> 
+    <span class="c1"># initialize graph (for graph visualization) </span>
 
     <span class="c1"># Add nodes and edges to the graph</span>
-    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v_w_list</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="c1"># for each vertex and list of neighbors and weights in edges dictionary (for graph visualization)</span>
-        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">v_w_list</span><span class="p">:</span> <span class="c1"># for each neighbor and weight in list of neighbors and weights</span>
-            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">w</span><span class="p">)</span> <span class="c1"># add edge to graph (for graph visualization)</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v_w_list</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
+    <span class="c1"># for each vertex and list of neighbors and weights in edges dictionary (for graph visualization)</span>
+        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">v_w_list</span><span class="p">:</span> 
+        <span class="c1"># for each neighbor and weight in list of neighbors and weights</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">w</span><span class="p">)</span> 
+            <span class="c1"># add edge to graph (for graph visualization)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="c1"># set figure size (for graph visualization)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
+    <span class="c1"># set figure size (for graph visualization)</span>
 
-    <span class="n">node_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'g'</span> <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">active_vertex</span> <span class="k">else</span> <span class="s1">'b'</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span> <span class="c1"># set node colors (for graph visualization)</span>
+    <span class="n">node_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'g'</span> <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">active_vertex</span> <span class="k">else</span> <span class="s1">'b'</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span> 
+    <span class="c1"># set node colors (for graph visualization)</span>
     <span class="c1"># green color for active vertex, blue color for all other vertices</span>
 
-    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">node_colors</span><span class="p">)</span> <span class="c1"># pos for coordinates and node_color for node colors (for graph visualization)</span>
-    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span> <span class="c1"># draw node labels (for graph visualization)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">node_colors</span><span class="p">)</span> 
+    <span class="c1"># pos for coordinates and node_color for node colors (for graph visualization)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span> 
+    <span class="c1"># draw node labels (for graph visualization)</span>
 
-    <span class="k">if</span> <span class="n">partial_path</span><span class="p">:</span> <span class="c1"># if partial path is not empty</span>
-        <span class="n">path_edges</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">partial_path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">partial_path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span> <span class="c1"># create list of edges in partial path</span>
-        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="n">path_edges</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">'y'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span> <span class="c1"># draw edges in partial path (for graph visualization)</span>
+    <span class="k">if</span> <span class="n">partial_path</span><span class="p">:</span> 
+    <span class="c1"># if partial path is not empty</span>
+        <span class="n">path_edges</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">partial_path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">partial_path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span> 
+        <span class="c1"># create list of edges in partial path</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="n">path_edges</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">'y'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span> 
+        <span class="c1"># draw edges in partial path (for graph visualization)</span>
 
-    <span class="k">if</span> <span class="n">active_edge</span><span class="p">:</span> <span class="c1"># if active edge is not empty</span>
-        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="p">[</span><span class="n">active_edge</span><span class="p">],</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">'g'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># draw active edge (for graph visualization)</span>
+    <span class="k">if</span> <span class="n">active_edge</span><span class="p">:</span> 
+    <span class="c1"># if active edge is not empty</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="p">[</span><span class="n">active_edge</span><span class="p">],</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">'g'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
+        <span class="c1"># draw active edge (for graph visualization)</span>
 
-    <span class="k">else</span><span class="p">:</span> <span class="c1"># if active edge is empty and partial path is empty (i.e., initial graph)</span>
-        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span> <span class="c1"># draw all edges and set default edge color and position</span>
+    <span class="k">else</span><span class="p">:</span> 
+    <span class="c1"># if active edge is empty and partial path is empty (i.e., initial graph)</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span> 
+        <span class="c1"># draw all edges and set default edge color and position</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span> <span class="c1"># turn off axis else it will show axis with vertex numbers</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span> <span class="c1"># tight layout as it will show axis with vertex numbers</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span> 
+    <span class="c1"># turn off axis else it will show axis with vertex numbers</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span> 
+    <span class="c1"># tight layout as it will show axis with vertex numbers</span>
 
-    <span class="n">buf</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span> <span class="c1"># initialize buffer, which is a BytesIO object (for graph visualization)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'png'</span><span class="p">)</span> <span class="c1"># save figure to buffer as png</span>
-    <span class="n">buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># seek to the beginning of the buffer</span>
-    <span class="n">image_array</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span> <span class="c1"># read buffer as image array, helping to create animation (for graph visualization)</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span> 
+    <span class="c1"># initialize buffer, which is a BytesIO object (for graph visualization)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'png'</span><span class="p">)</span> 
+    <span class="c1"># save figure to buffer as png</span>
+    <span class="n">buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> 
+    <span class="c1"># seek to the beginning of the buffer</span>
+    <span class="n">image_array</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span> 
+    <span class="c1"># read buffer as image array, helping to create animation (for graph visualization)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1"># close figure, guiding matplotlib to free memory</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> 
+    <span class="c1"># close figure, guiding matplotlib to free memory</span>
 
-    <span class="k">return</span> <span class="n">image_array</span> <span class="c1"># return image array (for graph visualization)</span>
+    <span class="k">return</span> <span class="n">image_array</span> 
+    <span class="c1"># return image array (for graph visualization)</span>
 
 
-<span class="k">def</span> <span class="nf">dijkstra_visualized</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">coords</span><span class="p">):</span> <span class="c1"># Dijkstra's algorithm to solve for minimum cost paths on a given graph (with visualization)</span>
-    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c1"># initialize visited set </span>
-    <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span><span class="n">vertex</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'infinity'</span><span class="p">)</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span> <span class="c1"># initialize distances dictionary (key: vertex, value: distance)</span>
-    <span class="n">previous_vertices</span> <span class="o">=</span> <span class="p">{</span><span class="n">vertex</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span> <span class="c1"># initialize previous vertices dictionary (key: vertex, value: previous vertex)</span>
-    <span class="n">distances</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># set distance of start vertex to 0</span>
-    <span class="n">vertices</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)]</span> <span class="c1"># initialize vertices list (tuple: (distance, vertex))</span>
+<span class="k">def</span> <span class="nf">dijkstra_visualized</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">coords</span><span class="p">):</span> 
+<span class="c1"># Dijkstra's algorithm to solve for minimum cost paths on a given graph (with visualization)</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> 
+    <span class="c1"># initialize visited set </span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span><span class="n">vertex</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'infinity'</span><span class="p">)</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span> 
+    <span class="c1"># initialize distances dictionary (key: vertex, value: distance)</span>
+    <span class="n">previous_vertices</span> <span class="o">=</span> <span class="p">{</span><span class="n">vertex</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span> 
+    <span class="c1"># initialize previous vertices dictionary (key: vertex, value: previous vertex)</span>
+    <span class="n">distances</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> 
+    <span class="c1"># set distance of start vertex to 0</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)]</span> 
+    <span class="c1"># initialize vertices list (tuple: (distance, vertex))</span>
 
-    <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># initialize images list (for graph visualization)</span>
-    <span class="n">partial_paths</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># initialize partial paths dictionary (key: vertex, value: partial path)</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span> 
+    <span class="c1"># initialize images list (for graph visualization)</span>
+    <span class="n">partial_paths</span> <span class="o">=</span> <span class="p">{}</span> 
+    <span class="c1"># initialize partial paths dictionary (key: vertex, value: partial path)</span>
 
-    <span class="k">while</span> <span class="n">vertices</span><span class="p">:</span> <span class="c1"># while vertices list is not empty (i.e., there are still vertices to visit)</span>
-        <span class="n">current_distance</span><span class="p">,</span> <span class="n">current_vertex</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span> <span class="c1"># pop vertex with minimum distance from vertices list</span>
-        <span class="k">if</span> <span class="n">current_vertex</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span> <span class="c1"># if vertex has already been visited, </span>
-            <span class="k">continue</span> <span class="c1"># continue to next iteration of while loop</span>
-        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">)</span> <span class="c1"># add vertex to visited set (i.e., mark vertex as visited)</span>
-        <span class="k">for</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">,</span> <span class="p">[]):</span> <span class="c1"># for each neighbor of current vertex </span>
-            <span class="n">active_edge</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_vertex</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span> <span class="c1"># set active edge (for graph visualization)</span>
+    <span class="k">while</span> <span class="n">vertices</span><span class="p">:</span> 
+        <span class="c1"># while vertices list is not empty (i.e., there are still vertices to visit)</span>
+        <span class="n">current_distance</span><span class="p">,</span> <span class="n">current_vertex</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span> 
+        <span class="c1"># pop vertex with minimum distance from vertices list</span>
+        <span class="k">if</span> <span class="n">current_vertex</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span> 
+        <span class="c1"># if vertex has already been visited, </span>
+            <span class="k">continue</span> 
+            <span class="c1"># continue to next iteration of while loop</span>
+        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">)</span> 
+        <span class="c1"># add vertex to visited set (i.e., mark vertex as visited)</span>
+        <span class="k">for</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">,</span> <span class="p">[]):</span> 
+        <span class="c1"># for each neighbor of current vertex </span>
+            <span class="n">active_edge</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_vertex</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span> 
+            <span class="c1"># set active edge (for graph visualization)</span>
 
-            <span class="n">partial_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="c1"># initialize partial path (for graph visualization)</span>
-            <span class="n">prev_vertex</span> <span class="o">=</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="c1"># initialize previous vertex (for graph visualization)</span>
-            <span class="k">while</span> <span class="n">prev_vertex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># while previous vertex is not None (i.e., while current vertex has a previous vertex)</span>
-                <span class="n">partial_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prev_vertex</span><span class="p">)</span> <span class="c1"># append previous vertex to partial path (for graph visualization)</span>
-                <span class="n">prev_vertex</span> <span class="o">=</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">prev_vertex</span><span class="p">]</span> <span class="c1"># update previous vertex to previous vertex of previous vertex (for graph visualization)</span>
-            <span class="n">partial_paths</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial_path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># add partial path to partial paths dictionary (for graph visualization)</span>
+            <span class="n">partial_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> 
+            <span class="c1"># initialize partial path (for graph visualization)</span>
+            <span class="n">prev_vertex</span> <span class="o">=</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> 
+            <span class="c1"># initialize previous vertex (for graph visualization)</span>
+            <span class="k">while</span> <span class="n">prev_vertex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="c1"># while previous vertex is not None (i.e., while current vertex has a previous vertex)</span>
+                <span class="n">partial_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prev_vertex</span><span class="p">)</span> 
+                <span class="c1"># append previous vertex to partial path (for graph visualization)</span>
+                <span class="n">prev_vertex</span> <span class="o">=</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">prev_vertex</span><span class="p">]</span> 
+                <span class="c1"># update previous vertex to previous vertex of previous vertex (for graph visualization)</span>
+            <span class="n">partial_paths</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial_path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+            <span class="c1"># add partial path to partial paths dictionary (for graph visualization)</span>
 
             <span class="n">image_array</span> <span class="o">=</span> <span class="n">visualize_graph</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">current_vertex</span><span class="p">,</span> <span class="n">partial_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">),</span> <span class="n">active_edge</span><span class="p">)</span>
             <span class="c1"># visualize graph (for graph visualization) </span>
-            <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_array</span><span class="p">)</span> <span class="c1"># append image array to images list (for graph visualization)</span>
+            <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_array</span><span class="p">)</span> 
+            <span class="c1"># append image array to images list (for graph visualization)</span>
 
-            <span class="n">distance</span> <span class="o">=</span> <span class="n">current_distance</span> <span class="o">+</span> <span class="n">weight</span> <span class="c1"># calculate distance to neighbor</span>
-            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">distances</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]:</span> <span class="c1"># if distance to neighbor is less than current distance to neighbor</span>
-                <span class="n">distances</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span> <span class="c1"># update distance to neighbor</span>
-                <span class="n">previous_vertices</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_vertex</span> <span class="c1"># update previous vertex of neighbor</span>
-                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">))</span> <span class="c1"># push neighbor to vertices list</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="n">current_distance</span> <span class="o">+</span> <span class="n">weight</span> 
+            <span class="c1"># calculate distance to neighbor</span>
+            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">distances</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]:</span> 
+            <span class="c1"># if distance to neighbor is less than current distance to neighbor</span>
+                <span class="n">distances</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span> 
+                <span class="c1"># update distance to neighbor</span>
+                <span class="n">previous_vertices</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_vertex</span> 
+                <span class="c1"># update previous vertex of neighbor</span>
+                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">))</span> 
+                <span class="c1"># push neighbor to vertices list</span>
 
-    <span class="n">path</span><span class="p">,</span> <span class="n">current_vertex</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">goal</span> <span class="c1"># initialize path list and current vertex</span>
-    <span class="k">while</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># while current vertex has a previous vertex</span>
-        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">)</span> <span class="c1"># append current vertex to path list</span>
-        <span class="n">current_vertex</span> <span class="o">=</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="c1"># update current vertex to previous vertex</span>
-    <span class="k">if</span> <span class="n">current_vertex</span> <span class="o">!=</span> <span class="n">start</span><span class="p">:</span> <span class="c1"># if current vertex is not start vertex</span>
-        <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span> <span class="c1"># return empty path and empty distances</span>
+    <span class="n">path</span><span class="p">,</span> <span class="n">current_vertex</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">goal</span> 
+    <span class="c1"># initialize path list and current vertex</span>
+    <span class="k">while</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
+    <span class="c1"># while current vertex has a previous vertex</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">)</span> 
+        <span class="c1"># append current vertex to path list</span>
+        <span class="n">current_vertex</span> <span class="o">=</span> <span class="n">previous_vertices</span><span class="p">[</span><span class="n">current_vertex</span><span class="p">]</span> 
+        <span class="c1"># update current vertex to previous vertex</span>
+    <span class="k">if</span> <span class="n">current_vertex</span> <span class="o">!=</span> <span class="n">start</span><span class="p">:</span> 
+    <span class="c1"># if current vertex is not start vertex</span>
+        <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span> 
+        <span class="c1"># return empty path and empty distances</span>
 
-    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="c1"># append start vertex to path list (i.e., path list is now complete)</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> 
+    <span class="c1"># append start vertex to path list (i.e., path list is now complete)</span>
 
     <span class="n">image_array</span> <span class="o">=</span> <span class="n">visualize_graph</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">active_vertex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partial_path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">active_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="c1"># visualize graph (for graph visualization)  </span>
-    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_array</span><span class="p">)</span> <span class="c1"># append image array to images list (for graph visualization)</span>
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_array</span><span class="p">)</span> 
+    <span class="c1"># append image array to images list (for graph visualization)</span>
 
-    <span class="n">imageio</span><span class="o">.</span><span class="n">mimsave</span><span class="p">(</span><span class="s1">'hw1.mp4'</span><span class="p">,</span> <span class="n">images</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># save images list as mp4 file</span>
+    <span class="n">imageio</span><span class="o">.</span><span class="n">mimsave</span><span class="p">(</span><span class="s1">'hw1.mp4'</span><span class="p">,</span> <span class="n">images</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="c1"># save images list as mp4 file</span>
     <span class="c1"># mimsave() function from imageio module to save images list as mp4 file</span>
     <span class="c1"># fps=1 to set frame rate to 1 frame per second</span>
 
-    <span class="k">return</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">distances</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="c1"># return path list in reverse order and distances list in reverse order</span>
+    <span class="k">return</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">distances</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span> <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> 
+    <span class="c1"># return path list in reverse order and distances list in reverse order</span>
 
-<span class="n">coords</span> <span class="o">=</span> <span class="n">parse_coordinates</span><span class="p">(</span><span class="s1">'coords.txt'</span><span class="p">)</span> <span class="c1"># parse coordinates file (for graph visualization)</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">parse_coordinates</span><span class="p">(</span><span class="s1">'coords.txt'</span><span class="p">)</span> 
+<span class="c1"># parse coordinates file (for graph visualization)</span>
 <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">parse_input</span><span class="p">(</span><span class="s1">'input.txt'</span><span class="p">)</span>
 <span class="n">path</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">dijkstra_visualized</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span>
 <span class="n">write_output</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Visualization saved as 'hw1.mp4'."</span><span class="p">)</span> <span class="c1"># print message to indicate that visualization has been saved as 'hw1.mp4'</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Visualization saved as 'hw1.mp4'."</span><span class="p">)</span> 
+<span class="c1"># print message to indicate that visualization has been saved as 'hw1.mp4'</span>
 </pre></div>
 
      </div>
